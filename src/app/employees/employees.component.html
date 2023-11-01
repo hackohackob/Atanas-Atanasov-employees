@@ -1,0 +1,44 @@
+<div *ngIf="employeePairs && employeePairs.length > 0; else noData" class="grid flex justify-content-center p-5 pt-0">
+    <p-card class="mt-3 col-6" header="Longest time worked together:" *ngIf="longestPair">
+        Emp#{{longestPair.employee1}} and Emp#{{longestPair.employee2}} for {{longestPair.daysWorkedTogether}} days on project {{longestPair.projectId}}.
+    </p-card>
+    
+    <p-table [value]="employeePairsSorted" class="col-12" styleClass="p-datatable-gridlines p-datatable-striped" [tableStyle]="{ 'min-width': '30rem', 'max-height': '10rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="projectId">Project ID <p-sortIcon field="projectId"></p-sortIcon></th>
+                <th pSortableColumn="employee1">First Employee <p-sortIcon field="employee1"></p-sortIcon></th>
+                <th pSortableColumn="employee2">Second Employee <p-sortIcon field="employee2"></p-sortIcon></th>
+                <th pSortableColumn="daysWorkedTogether">Days Worked Together <p-sortIcon field="daysWorkedTogether"></p-sortIcon></th>
+            </tr>
+            <tr>
+                <th>
+                    <p-columnFilter type="text" field="projectId"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="employee1"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="employee2"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="numeric" field="daysWorkedTogether"></p-columnFilter>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pair>
+            <tr>
+                <td>{{ pair.projectId }}</td>
+                <td>{{ pair.employee1 }}</td>
+                <td>{{ pair.employee2 }}</td>
+                <td>{{ pair.daysWorkedTogether }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<ng-template #noData>
+    <div class="flex justify-content-center">
+        <!-- <h3>No data loaded yet. Please upload a CSV file</h3> -->
+    </div>
+</ng-template>

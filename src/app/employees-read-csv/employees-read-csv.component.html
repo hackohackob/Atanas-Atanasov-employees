@@ -1,0 +1,7 @@
+    <p-card header="Load Employees CSV">
+      <p class="m-2">
+          Please load a CSV file with employees data. Data should be in the format: <br>
+          EmpID, ProjectID, DateFrom, DateTo <br>
+      </p>
+      <p-fileUpload class="mt:2" mode="basic" chooseLabel="Choose" name="employees" accept=".csv" (onSelect)="fileSelected($event)"></p-fileUpload>
+    </p-card>

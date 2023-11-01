@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { EmployeePair, EmployeeWorkRecord } from './types/employee';
+import { EmployeeService } from './employee.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'sirma-employees-task';
+  hideUploadCard = false;
+  employeePairs: EmployeePair[] = [];
+
+  constructor(private employeeService: EmployeeService) { }
+
+  employeesLoaded(employeesData: any) {
+    this.hideUploadCard = true;
+    this.employeePairs = this.employeeService.calculateDaysWorkedTogether(employeesData);    
+  }
 }
